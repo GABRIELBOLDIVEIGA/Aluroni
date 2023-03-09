@@ -12,7 +12,11 @@
       "value": "qtd_pessoas"
     },
     {
-      "nome": "Preço",
-      "value": "preco"
+      "nome": "Preço Mais Barato",
+      "value": "preco_mais_barato"
+    },
+    {
+      "nome": "Preço Mais Caro",
+      "value": "preco_mais_caro"
     }
   ]
