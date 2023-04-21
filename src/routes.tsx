@@ -1,27 +1,32 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Inicio from "pages/Inicio/index";
-import Cardapio from "pages/Cardapio/index";
-import Sobre from "pages/Sobre";
+
 import Menu from "components/Menu";
-import PaginaBase from "components/PaginaBase";
 import Rodape from "components/Rodape";
-import PaginaNaoEncontrada from "pages/PaginaNaoEncontrada/index";
-import Prato from "pages/Prato";
+import PaginaBase from "components/PaginaBase";
+
+const Inicio = lazy(() => import("pages/Inicio/index"));
+const Cardapio = lazy(() => import("pages/Cardapio/index"));
+const Sobre = lazy(() => import("pages/Sobre"));
+const Prato = lazy(() => import("pages/Prato"));
+const PaginaNaoEncontrada = lazy(() => import("pages/PaginaNaoEncontrada/index"));
 
 export default function AppRouter() {
     return (
         <main className="container">
             <Router>
                 <Menu />
-                <Routes>
-                    <Route path="/" element={<PaginaBase />}>
-                        <Route index element={<Inicio />} />
-                        <Route path="cardapio" element={<Cardapio />} />
-                        <Route path="sobre" element={<Sobre />} />
-                    </Route>
-                    <Route path="prato/:id" element={<Prato />} />
-                    <Route path="*" element={<PaginaNaoEncontrada />} />
-                </Routes>
+                <Suspense fallback={<p>Carregando...</p>}>
+                    <Routes>
+                        <Route path="/" element={<PaginaBase />}>
+                            <Route index element={<Inicio />} />
+                            <Route path="cardapio" element={<Cardapio />} />
+                            <Route path="sobre" element={<Sobre />} />
+                        </Route>
+                        <Route path="prato/:id" element={<Prato />} />
+                        <Route path="*" element={<PaginaNaoEncontrada />} />
+                    </Routes>
+                </Suspense>
                 <Rodape />
             </Router>
         </main>
