@@ -47,7 +47,7 @@ export default function Itens({ busca, filtro, ordenador }: ItensProps) {
     return (
         <div className={styles.itens}>
             {lista.map((item) => (
-                <Item {...item} /* item={item} */ key={item.id} />
+                <Item {...item} key={item.id} />
             ))}
         </div>
     );
