@@ -1,17 +1,14 @@
+import { lazy } from "react";
 import styles from "./Prato.module.scss";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import cardapio from "data/cardapio.json";
-import TagsPrato from "components/TagsPrato";
-import PaginaNaoEncontrada from "pages/PaginaNaoEncontrada/index";
-import PaginaBase from "components/PaginaBase";
+
+const TagsPrato = lazy(() => import("components/TagsPrato"));
+const PaginaNaoEncontrada = lazy(() => import("pages/PaginaNaoEncontrada/index"));
+const PaginaBase = lazy(() => import("components/PaginaBase"));
 
 export default function Prato() {
-    console.log(useParams());
-    console.log(useLocation());
-    console.log(useParams());
-
     const { id } = useParams();
     const navigate = useNavigate();
     const prato = cardapio.find((item) => item.id === Number(id));
